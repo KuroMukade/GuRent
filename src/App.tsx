@@ -1,19 +1,14 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-
 import './scss/app.scss';
 
 import Header from './components/Header';
-import Home from './Pages/Home';
+import AppRoutes from './routes';
 
 function App() {
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <Routes>
-          <Route path='/' element={<Home />} />
-        </Routes>
+        <AppRoutes />
       </div>
     </div>
   );
