@@ -1,0 +1,43 @@
+@import './fonts';
+@import './libs/normalize';
+@import './variables';
+
+.wrapper {
+    background-color: white;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto 0 auto;
+  
+}
+
+.header {
+  text-transform: uppercase;
+  padding: 25px 0 25px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto 0 auto;
+
+  &-navigation {
+    display: flex;
+    justify-content: space-between;
+    min-width: 241px;
+  }
+
+  &-phone {
+    display: flex;
+    align-items: center;
+    font-weight: bold;  
+
+    img {
+      max-width: 19px;
+      max-height: 19px;
+      margin-right: 10px;
+    }
+  }
+
+}

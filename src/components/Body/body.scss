@@ -1,0 +1,29 @@
+@import '../../scss/variables';
+@import '../../scss/components/all';
+
+.main {
+    display: flex;
+
+    div {
+        margin-top: 150px;
+
+        h1, h2 {
+            font-family: 'Akzidenz';
+            font-weight: 500;
+
+            span {
+                color: $purple;
+                font-family: 'Akzidenz';
+                font-weight: 500;
+            }
+        }
+
+        h2 {
+            margin-top: 16px;
+        }
+
+        button {
+            margin-top: 40px;
+        }
+    }
+}
