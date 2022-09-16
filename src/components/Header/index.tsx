@@ -1,17 +1,14 @@
 import React from "react";
+import Logo from "../Logo";
 import { Link } from "react-router-dom";
 
 
 const Header = () => {
     return (
-        <header className="header">
-        <div className='header-logo'>
-          <Link to={"/"}>
-            <img src="logotype.png" alt="Gurent logo" />
-          </Link>
-        </div>
+      <header className="header">
+        <Logo />
         <div className='header-navigation'>
-          <Link className="link"  to={"/"}>Арендные дома</Link>
+          <Link className="link" to={"/"}>Арендные дома</Link>
           <Link className="link" to={'/'}>Карты</Link>
         </div>
         <a href='/' className='header-phone'>

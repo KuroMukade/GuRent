@@ -1,0 +1,93 @@
+@import '../../scss/variables';
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 19;
+    transition: all $duration ease-in;
+    background: rgba(17, 21, 24, 0.8);
+
+    &.active {
+        display: none;
+    }
+}
+
+.panel {
+    height: 100vh;
+    width: 80px;
+    background-color: $black;
+    z-index: 25;
+
+    display: flex;
+    justify-content: center;
+
+    nav {
+        padding: 38px 24px;
+    }
+
+    .menu-btn {
+        z-index: 100;
+        margin-top: 38px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 33px;
+        height: 28px;
+        cursor: pointer;
+        transition: all $duration ease-in-out;
+    
+        &__burger {
+            width: 32px;
+            height: 3.57px;
+            background: $white;
+            border-radius: 0px;
+            transition: all $duration ease-in-out;
+    
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                width: 32px;
+                height: 3.57px;
+                border: none;
+                background: $white;
+            }
+    
+            &::before {
+                transform: translateY(-10.14px);
+                transition: all ease-in $duration;
+
+            }
+    
+            &::after {
+                transform: translateY(10.14px);
+                transition: all ease-in $duration;
+
+            }
+        }
+    }
+}
+
+.open .menu-btn__burger {
+    transform: translateX(-50px);
+    background: transparent;
+
+    &::before {
+        transform: rotate(45deg) translate(35px, -35px);
+        transition: all ease-in $duration;
+    }
+
+    &::after {
+        transform: rotate(-45deg) translate(35px, 35px);
+        transition: all ease-in $duration;
+    }
+}
+
+
+
+
+

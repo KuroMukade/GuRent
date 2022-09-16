@@ -2,14 +2,14 @@
 @import './libs/normalize';
 @import './variables';
 
-.wrapper {
-    background-color: white;
+#root {
+  display: flex;
 }
 
-.content {
-  max-width: 1000px;
-  margin: 0 auto 0 auto;
-  
+.wrapper {
+    background-color: white;
+    max-width: 1000px;
+    margin: 0 auto 0 auto;
 }
 
 .header {
