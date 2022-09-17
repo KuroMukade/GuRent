@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames';
 
 import './sidebar.scss';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 const SidePanel = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    useEffect(() => {
-        const keyHandler = (e: KeyboardEvent) => {
-            if (sidebarOpen && e.key === 'Escape') setSidebarOpen(false);
-        }
-        document.addEventListener('keydown', keyHandler);
-        return () => document.removeEventListener('keydown', keyHandler);
-    }, [sidebarOpen])
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+    const buttonRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (sidebarOpen) {
@@ -21,6 +15,14 @@ const SidePanel = () => {
             document.body.style.overflow = "auto";
         }
     }, [sidebarOpen]);
+
+    useOnClickOutside(buttonRef, () => {
+        const keyHandler = (e: KeyboardEvent) => {
+            if (sidebarOpen && e.key === 'Escape') setSidebarOpen(false);
+        }
+        document.addEventListener('keydown', keyHandler);
+        return () => document.removeEventListener('keydown', keyHandler);
+    });
 
     const sidebarOpenHandler = () => {
         if (sidebarOpen === false) {
@@ -34,6 +36,7 @@ const SidePanel = () => {
     <aside className='panel'>
         <div className={`overlay ${sidebarOpen ? '' : 'active'}`} />
         <div className={`menu-btn ${sidebarOpen ? 'open' : ''}`} 
+            ref={buttonRef}
             onClick={() => sidebarOpenHandler()}>
             <div className="menu-btn__burger" />
         </div>
