@@ -6,23 +6,23 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 const SidePanel = () => {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-    const buttonRef = useRef<HTMLDivElement>(null);
+    const backgroundRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    useOnClickOutside(backgroundRef, () => {
         if (sidebarOpen) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [sidebarOpen]);
+    });
 
-    useOnClickOutside(buttonRef, () => {
+    useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
             if (sidebarOpen && e.key === 'Escape') setSidebarOpen(false);
         }
         document.addEventListener('keydown', keyHandler);
         return () => document.removeEventListener('keydown', keyHandler);
-    });
+    }, [sidebarOpen]);
 
     const sidebarOpenHandler = () => {
         if (sidebarOpen === false) {
@@ -34,9 +34,9 @@ const SidePanel = () => {
 
   return (
     <aside className='panel'>
-        <div className={`overlay ${sidebarOpen ? '' : 'active'}`} />
+        <div className={`overlay ${sidebarOpen ? '' : 'active'}`}
+            ref={backgroundRef} />
         <div className={`menu-btn ${sidebarOpen ? 'open' : ''}`} 
-            ref={buttonRef}
             onClick={() => sidebarOpenHandler()}>
             <div className="menu-btn__burger" />
         </div>
