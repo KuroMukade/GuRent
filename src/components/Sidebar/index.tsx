@@ -1,53 +1,59 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
+import SidebarNav from '../SidebarNavigation';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import classNames from 'classnames';
 
 import './sidebar.scss';
-import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 const SidePanel = () => {
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-    const backgroundRef = useRef<HTMLDivElement>(null);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
-    useOnClickOutside(backgroundRef, () => {
-        if (sidebarOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
-    });
-
-    useEffect(() => {
-        const keyHandler = (e: KeyboardEvent) => {
-            if (sidebarOpen && e.key === 'Escape') setSidebarOpen(false);
-        }
-        document.addEventListener('keydown', keyHandler);
-        return () => document.removeEventListener('keydown', keyHandler);
-    }, [sidebarOpen]);
-
-    const sidebarOpenHandler = () => {
-        if (sidebarOpen === false) {
-            setSidebarOpen(true);
-        } else {
-            setSidebarOpen(false);
-        }
+  useOnClickOutside(backgroundRef, () => {
+    if (sidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
+  });
+
+  useEffect(() => {
+    const keyHandler = (e: KeyboardEvent) => {
+      if (sidebarOpen && e.key === 'Escape') setSidebarOpen(false);
+    };
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
+  }, [sidebarOpen]);
+
+  const sidebarOpenHandler = () => {
+    if (sidebarOpen === false) {
+      setSidebarOpen(true);
+    } else {
+      setSidebarOpen(false);
+    }
+  };
 
   return (
-    <aside className='panel'>
-        <div className={`overlay ${sidebarOpen ? '' : 'active'}`}
-            ref={backgroundRef} />
-        <div className={`menu-btn ${sidebarOpen ? 'open' : ''}`} 
-            onClick={() => sidebarOpenHandler()}>
-            <div className="menu-btn__burger" />
+    <>
+      <aside className="panel">
+        <div
+          className={classNames('menu-btn', {
+            'open': sidebarOpen,
+          })}
+          onClick={() => sidebarOpenHandler()}>
+          <div className="menu-btn__burger" />
         </div>
-        {/* <nav>
-            <ul>
-                <li><Link to={"/flats"}>Квартиры</Link></li>
-                <li><Link to={"/houses"}>Дома</Link></li>
-            </ul>
-        </nav> */}
-    </aside>
-  )
-}
+        <SidebarNav sidebarOpen={sidebarOpen} />
+      </aside>
+      <div
+          className={classNames('overlay', {
+            'active': sidebarOpen,
+          })}
+          ref={backgroundRef}
+        />
+    </>
+
+  );
+};
 
 export default SidePanel;
